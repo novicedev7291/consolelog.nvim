@@ -1,0 +1,77 @@
+=================================================================================
+                                                                *consolelog.txt*
+
+This plugin let you log messages with various levels i.e. debug, warn, info, 
+error into console (basically in neovim console line beloe status line). Also,
+for warn and error it highlight the messages in orange & red color resp. See
+usage below:
+
+                                                              *consolelog.setup*
+
+    Setup the module with given {options}, you may pass the empty table instead
+    to setup the plugin with default options. >
+        
+        local logger = require("consolelog").setup{}
+            or
+        local logger = require("consolelog").setup{
+            ---Name to be logged with whole message in logs
+            name = "consolelog",
+
+            ---Default level to be used if not specified
+            level = "info",
+
+            ---Various levels
+             levels = {
+                 trace = { priority = 100, hl = "Comment" },
+                 debug = { priority = 90, hl = "Comment" },
+                 info = { priority = 80, hl = "None" },
+                 warn = { priority = 70, hl = "WarningMsg" },
+                 error = { priority = 60, hl = "ErrorMsg" },
+                 fatal = { priority = 50, hl = "ErrorMsg" }
+             }
+        }
+<
+
+                                                             *consolelog.info()*
+
+    consolelog.info(...)
+        
+        Log the message to the neovim console. You can also use the variable 
+        interpolation into message to replace the values in your message, the 
+        placeholder will be `<>`. See below: >
+            consolelog.finfo("Some log message with <>", value)
+<
+
+        Also, you can use the multiline messages. >
+        consolelog.info([[
+        Some multi line message
+        very handy in case of error messages
+        ]]
+<
+
+        Table can also be used as a value >
+        consolelog.info("Some table <>", { name = "Kuldeep", 
+                                           other_key = "Other Key"})
+<
+
+                  *consolelog.error()* *consolelog.trace()* *consolelog.fatal()*
+                                        *consolelog.debug()* *consolelog.warn()*
+    
+    All methods take the same form of arguments as |consolelog.info()|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+vim:tw=78:ts=8:ft=help:norl
